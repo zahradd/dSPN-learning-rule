@@ -17,35 +17,13 @@ The model demonstrates how a **single neuron can solve the Nonlinear Feature Bin
 - **Inhibitory Plasticity Rule:** Enhances dendritic compartmentalization to improve feature discrimination.
 - **Simulations for NFBP Learning:** Includes both clustered and randomly distributed synapses to test learning capabilities.
 
-## Repository Structure
-```
-dSPN-learning-rule/
-│── models/                  # Computational models (NEURON/NEST/Brian files)
-│── simulations/              # Scripts to reproduce figures from the manuscript
-│── data/                     # Processed simulation data
-│── results/                  # Output files from model simulations
-│── notebooks/                # Jupyter Notebooks for data visualization & analysis
-│── figures/                  # Plots and images used in the paper
-│── environment.yml           # Conda environment file for dependencies
-│── requirements.txt          # Alternative requirements file for pip users
-│── README.md                 # Documentation (this file)
-│── LICENSE                   # Licensing information
-│── CITATION.cff              # Citation metadata
+
 ```
 
-## Installation
-To run the simulations, ensure you have the required dependencies installed. We recommend using **Conda** for environment management.
 
-### Using Conda (Recommended)
-```bash
-conda env create -f environment.yml
-conda activate dSPN-learning
-```
 
-### Using pip (Alternative)
-```bash
-pip install -r requirements.txt
-```
+
+
 
 ## Running Simulations
 
@@ -89,7 +67,7 @@ If you use this code, please cite the following paper:
 For questions or issues, please reach out to **zahra.khodadadi@scilifelab.se** or open an issue in this repository.
 
 ## License
-This project is licensed under the **MIT License**. See the LICENSE file for details.
+This project is licensed under the **GNU General Public License v3.0**. See the LICENSE file for details.
 
 ---
 This repository enables full reproducibility of the results presented in the manuscript, providing detailed documentation for model execution and result interpretation. Happy coding!
