@@ -14,7 +14,6 @@ If tau1/tau2 is very small, this is single exponential decay with time constant 
 The factor is evaluated in the initial block 
 such that an event of weight 1 generates a
 peak conductance of 1.
-supraba(dopa,expectt,weight,ca_nmdai,cali,g)
 Because the solution is a sum of exponentials, the
 coupled equations can be solved as a pair of independent equations
 by the more efficient cnexp method.
@@ -81,8 +80,8 @@ STATE {
 	A (uS)
 	B (uS)
 	weight (uS)
-	tresh (mM)
-	tresh_min (mM)
+	CTH (mM)
+	CTL (mM)
 	
 
 }
@@ -101,8 +100,8 @@ INITIAL {
 	factor = -exp(-tp/tau1) + exp(-tp/tau2)
 	factor = 1/factor
 	weight = w0
-	tresh = treshf
-	tresh_min = treshf_min
+	CTH = treshf
+	CTL = treshf_min
 	synapticActiveTime = 0
 	inRefractoryPeriod=0
 
@@ -121,9 +120,9 @@ BREAKPOINT {
 DERIVATIVE state {
 	A' = -A/tau1
 	B' = -B/tau2
-	weight' =supraba(dopa,expectt,weight,tresh,tresh_min,cali+cai,g)
-	tresh' = sTresh(expectt,dopa,tresh,tresh_min,mltype)
-	tresh_min' = sTresh_min(expectt,dopa,tresh,tresh_min,mltype)
+	weight' =DeltaW_inh(dopa,expectt,weight,CTH,CTL,cali+cai,g)
+	CTH' = CTH_func(expectt,dopa,CTH,CTL,mltype)
+	CTL' = CTL_func(expectt,dopa,CTH,CTL,mltype)
 
 
 	
@@ -153,7 +152,7 @@ NET_RECEIVE(dummy) {
   }
 }
 
-FUNCTION supraba(dopam,expec,we(uS),tresh(mM),tresh_min(mM),calic(mM),ge(uS))(uS/ms) {
+FUNCTION DeltaW_inh(dopam,expec,we(uS),CTH(mM),CTL(mM),calic(mM),ge(uS))(uS/ms) {
     UNITSOFF
     
       if (calic > 0.0004) {
@@ -166,28 +165,28 @@ FUNCTION supraba(dopam,expec,we(uS),tresh(mM),tresh_min(mM),calic(mM),ge(uS))(uS
        }
        
    
-	supraba =wrate*expec*FuncCalj(mltype,dopam,ge,tresh,tresh_min)*we*(wmax-we)
+	DeltaW_inh =wrate*expec*DeltaW_inh_func(mltype,dopam,ge,CTH,CTL)*we*(wmax-we)
 	UNITSON    
 }
 
-FUNCTION sTresh(expec,dopam,tresh(mM),tresh_min(mM),calnm)(uM/ms) {
+FUNCTION CTH_func(expec,dopam,CTH(mM),CTL(mM),calnm)(uM/ms) {
     UNITSOFF
-    sTresh =tmaxrate*expec*(-1/(1+exp(-(h*Norm(calnm)-h*tresh_min)/1))+3/(1+exp(-(h*Norm(calnm)-h*tresh)/1)))
+    CTH_func =tmaxrate*expec*(-1/(1+exp(-(h*Norm(calnm)-h*CTL)/1))+3/(1+exp(-(h*Norm(calnm)-h*CTH)/1)))
 	UNITSON    
 }
-FUNCTION sTresh_min(expec,dopam,tresh(mM),tresh_min(mM),calnm)(uM/ms) {
+FUNCTION CTL_func(expec,dopam,CTH(mM),CTL(mM),calnm)(uM/ms) {
     UNITSOFF
-    sTresh_min =-tminrate*expec*(-2/(1+exp(-(h*Norm(calnm+0.0006)-h*tresh_min)/1))+3/(1+exp(-(h*Norm(calnm+0.0006)-h*tresh)/1)))
+    CTL_func =-tminrate*expec*(-2/(1+exp(-(h*Norm(calnm+0.0006)-h*CTL)/1))+3/(1+exp(-(h*Norm(calnm+0.0006)-h*CTH)/1)))
 	UNITSON    
 }
-FUNCTION FuncCalj(calnm(mM),dopam,g(uS),tresh (mM),tresh_min(mM))() {
+FUNCTION DeltaW_inh_func(calnm(mM),dopam,g(uS),CTH (mM),CTL(mM))() {
     UNITSOFF
     if (synapticActiveTime==0) {
-	  FuncCalj =1*(-1/(1+exp(-(h*Norm(calnm)-h*tresh_min)/1))+3/(1+exp(-(h*Norm(calnm)-h*tresh)/1)))
+	  DeltaW_inh_func =1*(-1/(1+exp(-(h*Norm(calnm)-h*CTL)/1))+3/(1+exp(-(h*Norm(calnm)-h*CTH)/1)))
 	  
 
 	} else {
-	  FuncCalj =-1*(-1/(1+exp(-(h*Norm(calnm)-h*tresh_min)/1))+3/(1+exp(-(h*Norm(calnm)-h*tresh)/1)))
+	  DeltaW_inh_func =-1*(-1/(1+exp(-(h*Norm(calnm)-h*CTL)/1))+3/(1+exp(-(h*Norm(calnm)-h*CTH)/1)))
 
       }
     UNITSON

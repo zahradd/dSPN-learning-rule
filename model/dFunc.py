@@ -80,17 +80,7 @@ def getSpiketrain(train1,tstarts,synNumber1,inputDict,assignInputTask,timespan,N
           random.shuffle(Input)
 
 
-    elif distribution=='uniform':
-        Input=[]
-        # f=multiples(1,len(inputprobebility) )
-        f=list(range(len(inputprobebility)))
-        for ind in f:
-         reset=0   
-         for i in range(totalnumer):
-            if len(inputprobebility)*reset+ind <totalnumer:
-                 Input.append(4*reset+ind)
-                 reset=reset+1
-   
+  
 
     
     Inputt = iter(Input)
@@ -989,13 +979,9 @@ def putSynapse_in4(cell,sec,tra,w,stORsh,pos,magOrnot,wmax,interval, tminrate , 
                    # tra2.append(value+280)
     spike_times =tra2
 
-#    print('type tra',type(tra))
-#    syn = h.glutamate_ica_nmda(0.95,sec)
-    if magOrnot==1:
-  #  syn = h.Gaba_p1(pos,sec=sec)
-       syn = h.Gaba_mag(pos,sec=sec)
-    else:
-       syn = h.Gaba_p1(pos,sec=sec)
+
+    syn = h.Gaba_mag(pos,sec=sec)
+   
 
     syn.wmax=wmax
     syn.w0=w*stORsh[3]

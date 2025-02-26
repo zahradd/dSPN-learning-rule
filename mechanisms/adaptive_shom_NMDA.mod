@@ -64,14 +64,14 @@ ASSIGNED {
 	
 }
 
-STATE {Ron Roff weight tresh }
+STATE {Ron Roff weight kernel_MidPoint }
 
 INITIAL {
 	Rinf = Cmax*Alpha / (Cmax*Alpha + Beta)
 	Rtau = 1 / (Cmax*Alpha + Beta)
 	synon = 0
 	weight = w0
-    tresh = treshf
+    kernel_MidPoint = treshf
     synapticActiveTime = 0
 
     
@@ -86,8 +86,8 @@ BREAKPOINT {
 	iNMDA = g*(v - Erev)
     ica_nmda = 0.175*iNMDA   :(5-10 times more permeable to Ca++ than Na+ or K+, Ascher and Nowak, 1988)
     iNMDA = 0.825*iNMDA
-    weight=weight+supra(dopa,weight,ca_nmdai,cali,cai,g,tresh)
-    tresh=tresh+sTresh(dopa,tresh,conc0,mltype)
+    weight=weight+deltaW(dopa,weight,ca_nmdai,cali,cai,g,kernel_MidPoint)
+    kernel_MidPoint=kernel_MidPoint+MP_kernel(dopa,kernel_MidPoint,conc0,mltype)
 
    
 }
@@ -152,7 +152,7 @@ NET_RECEIVE(dummy, on, nspike, r0, t0 (ms)) {
 }
 
 
-FUNCTION supra(dopam,we(uS),conc(mM),calic(mM),cai(mM),g_p(uS),tresh(mM))(uS/ms) {
+FUNCTION deltaW(dopam,we(uS),conc(mM),calic(mM),cai(mM),g_p(uS),kernel_MidPoint(mM))(uS/ms) {
     UNITSOFF
     
     
@@ -169,62 +169,40 @@ FUNCTION supra(dopam,we(uS),conc(mM),calic(mM),cai(mM),g_p(uS),tresh(mM))(uS/ms)
        }
     }
     
-	supra =((rate_ltd*we*mltype*funcCalMin(mltype)*(dopam-1))+(rate_ltp*funcCal(conc0,tresh)*(dopam+1)))*synapticActiveTime*dopam*dopam
+	deltaW =((rate_ltd*we*mltype*LTD_kernel_function(mltype)*(dopam-1))+(rate_ltp*LTP_kernel_function(conc0,kernel_MidPoint)*(dopam+1)))*synapticActiveTime*dopam*dopam
 	
 	UNITSON    
 }
-FUNCTION sTresh(dopam,tresh(mM),conc0,mltype)(uM/ms) {
+FUNCTION MP_kernel(dopam,kernel_MidPoint(mM),conc0,mltype)(uM/ms) {
     UNITSOFF
-    sTresh =((-rate_ltd_thrsh*funcCalt(conc0,tresh)*(dopam-1))-rate_ltp_tresh*(funcCalt(conc0,tresh)*(dopam+1)))*synapticActiveTime*dopam*dopam
+    MP_kernel =((-rate_ltd_thrsh*MP_kernel_function(conc0,kernel_MidPoint)*(dopam-1))-rate_ltp_tresh*(MP_kernel_function(conc0,kernel_MidPoint)*(dopam+1)))*synapticActiveTime*dopam*dopam
 	UNITSON    
 }
 
 
-FUNCTION trap(g_p(uS))() {
+
+
+
+FUNCTION LTP_kernel_function(calnm(mM),kernel_MidPoint(mM))() {
     UNITSOFF
-	if (g_p < 1e-7) {
-		trap = 0
-	} else {
-	    trap = 1
-        }
+    LTP_kernel_function= (1-(1 / (1 + exp((-1000*calnm + (1000*kernel_MidPoint))/1))))*(1 / (1 + exp((-1000*calnm+(1000*kernel_MidPoint))/1))) 
+    UNITSON
+}
+FUNCTION MP_kernel_function(calnm(mM),kernel_MidPoint(mM))() {
+    UNITSOFF
+    MP_kernel_function= (1-(1 / (1 + exp((-1000*calnm + (1000*kernel_MidPoint))/3))))*(1 / (1 + exp((-1000*calnm+(1000*kernel_MidPoint))/3)))
     UNITSON
 }
 
-
-FUNCTION funcCal(calnm(mM),tresh(mM))() {
+FUNCTION LTD_kernel_function(calnm(mM))() {
     UNITSOFF
-    funcCal= (1-(1 / (1 + exp((-1000*calnm + (1000*tresh))/1))))*(1 / (1 + exp((-1000*calnm+(1000*tresh))/1))) 
-    UNITSON
-}
-FUNCTION funcCalt(calnm(mM),tresh(mM))() {
-    UNITSOFF
-    funcCalt= (1-(1 / (1 + exp((-1000*calnm + (1000*tresh))/3))))*(1 / (1 + exp((-1000*calnm+(1000*tresh))/3)))
-    UNITSON
-}
-FUNCTION funcCalteg(calnm(mM),tresh(mM))() {
-    UNITSOFF
-    funcCalteg= (-1 / (1 + exp((-1000*calnm+(1000*tresh))/2.5))) 
-    UNITSON
-}
-FUNCTION funcCalMin(calnm(mM))() {
-    UNITSOFF
-    funcCalMin=1 / (1 + exp((-Norm(calnm)+7)/1))
+    LTD_kernel_function=1 / (1 + exp((-Norm(calnm)+7)/1))
     UNITSON
 }
 
-FUNCTION funcCalMin2(calnm(mM))() {
-    UNITSOFF
-    funcCalMin2=1 / (1 + exp((-Norm(calnm)+25)/5))
-    UNITSON
-}
 
 FUNCTION Norm(calnm(mM))() {
     UNITSOFF
     Norm= 100000*calnm
-    UNITSON
-}
-FUNCTION funcCalMin1(calnm(mM))() {
-    UNITSOFF
-    funcCalMin1= 1 / (1 + exp((-100000*calnm+(100000*mltypeMin))/1)) 
     UNITSON
 }
