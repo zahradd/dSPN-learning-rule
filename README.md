@@ -36,8 +36,7 @@ Navigate to the **experiments/** directory from were you can find all the differ
 cd  experiments/
 ```
 
-- **cluster_inh_spill_combine_2** comments describing the simulation here please
-- **cluster_inh_spill_example_3**
+- **cluster_inh_spill_example_3** comments describing the simulation here please
 - **distribute_spill_inh_10**
 - **xor_dist2_inh_7**
 - **xor_dist1_inh_6**
@@ -47,7 +46,7 @@ cd  experiments/
 To start a simulation go to, for example, the first folder:
 
 ```bash
-cd  cluster_inh_spill_combine_2
+cd  cluster_inh_spill_example_3
 ```
 
 compile mechanisms in this folder:
@@ -83,23 +82,21 @@ jupyter-lab plot.ipynb
 If you use this code, please cite the following paper:
 
 ```
-@article{khodadadi2024dspn,
+@article{khodadadi2025dspn,
   author = {Khodadadi, Zahra and Trpevski, Daniel and Lindroos, Robert and Hellgren Kotaleski, Jeanette},
   title = {Local, calcium- and reward-based synaptic learning rule that enhances dendritic nonlinearities can solve the nonlinear feature binding problem},
   journal = {Journal TBD},
-  year = {2024}
+  year = {2025}
 }
 ```
-
-## Contact
-
-For questions or issues, please reach out to **[zahra.khodadadi@scilifelab.se](mailto\:zahra.khodadadi@scilifelab.se)** or open an issue in this repository.
 
 ## License
 
 This project is licensed under the **GNU General Public License v3.0**. See the LICENSE file for details.
 
----
+## Contact
 
-This repository enables full reproducibility of the results presented in the manuscript, providing detailed documentation for model execution and result interpretation. Happy coding!
+For questions or issues, please reach out to **[zahra.khodadadi@scilifelab.se](mailto\:zahra.khodadadi@scilifelab.se)** or open an issue in this repository.
+
+Happy coding!
 

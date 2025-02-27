@@ -13,26 +13,21 @@ model_dir = os.path.join(cur_dir, '..', '..',  '..','model')
 updatedmodel_dir = os.path.abspath(model_dir)
 sys.path.append(updatedmodel_dir)  
 from neuron import h
-import  MSN_builder as build
 import pickle
 import dFunc as func
-# Load model mechanisms
-import neuron as nrn
+
 import random
-import matplotlib.pyplot as plt
 import numpy as np
 import efel
 import copy
 import operator 
 import spine as sp
-current_dir = os.path.abspath(__file__)
-new_dir = os.path.join(current_dir, '..', '..', '..', 'mechanisms')
-mechanisms = os.path.abspath(new_dir)
-h.nrn_load_dll(mechanisms + 'x86_64/.libs/libnrnmech.so')
-nrn.load_mechanisms(mechanisms)
+
 h.load_file('stdlib.hoc')
 h.load_file('import3d.hoc')
 h.load_file('stdrun.hoc')
+
+
 
 ####################
 
@@ -277,17 +272,17 @@ class justSteep:
                 Rec_Wg_GABA[isyni]= h.Vector()
                 Rec_Wg_GABA[isyni].record(syni._ref_weight,100)
                 checkD_i[isyni]= h.Vector()
-                checkD_i[isyni].record(syni._ref_tresh,100)
+                checkD_i[isyni].record(syni._ref_treshf,100)
                 checkDnaro_i[isyni]= h.Vector()
                 checkDnaro_i[isyni].record(syni._ref_mltype,100)
                 checkD_imin[isyni]= h.Vector()
-                checkD_imin[isyni].record(syni._ref_tresh_min,100)
+                checkD_imin[isyni].record(syni._ref_treshf_min,100)
                 
             for isyn,syn1 in enumerate(list_syn_nmda):
                 Rec_Wg_NMDA[isyn]= h.Vector()
                 Rec_Wg_NMDA[isyn].record(syn1._ref_weight,100)
                 checkD[isyn]= h.Vector()
-                checkD[isyn].record(syn1._ref_tresh,100)
+                checkD[isyn].record(syn1._ref_treshf,100)
                 checkDnaro[isyn]= h.Vector()
                 checkDnaro[isyn].record(syn1._ref_conc0,100)
                 checkDLtype[isyn]= h.Vector()
@@ -305,7 +300,7 @@ class justSteep:
                 Rec_Wg_NMDA_extraInput[isyn]= h.Vector()
                 Rec_Wg_NMDA_extraInput[isyn].record(syn1._ref_weight,100)
                 checkD_cor[isyn]= h.Vector()
-                checkD_cor[isyn].record(syn1._ref_tresh,100)
+                checkD_cor[isyn].record(syn1._ref_treshf,100)
                 checkDnaro_cor[isyn]= h.Vector()
                 checkDnaro_cor[isyn].record(syn1._ref_conc0,100)
                 checkDLtype_cor[isyn]= h.Vector()
