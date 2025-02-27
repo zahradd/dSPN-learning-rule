@@ -1,14 +1,18 @@
 # dSPN-learning-rule
 
-**This is under construction**
+**This repo is under re-construction for increased clearity**
 
 ## Overview
 
 This repository contains the code and data used in the study **"Local, calcium- and reward-based synaptic learning rule that enhances dendritic nonlinearities can solve the nonlinear feature binding problem"** by **Zahra Khodadadi, Daniel Trpevski, Robert Lindroos, and Jeanette Hellgren Kotaleski**.
 
-The study presents a **biophysically detailed model** of direct pathway Striatal Projection Neurons (dSPNs) and proposes two **synaptic learning rules**:
+Using a **biophysically detailed model** of direct pathway Striatal Projection Neurons (dSPNs), from the striatal SPN library:
 
-1. **A local synaptic learning rule** based on calcium dynamics and reward signals.
+https://github.com/ModelDBRepository/266775)
+
+we here presents two **synaptic learning rules**:
+
+1. **An excitatory local synaptic learning rule** based on calcium dynamics and reward signals.
 2. **An inhibitory plasticity rule** that enhances dendritic compartmentalization to improve feature discrimination.
 
 The model demonstrates how a **single neuron can solve the Nonlinear Feature Binding Problem (NFBP)** by leveraging dendritic nonlinearities, metaplasticity, and inhibitory plasticity.
@@ -21,34 +25,56 @@ The model demonstrates how a **single neuron can solve the Nonlinear Feature Bin
 - **Metaplasticity:** Regulates learning stability and maintains synaptic weights within a physiological range.
 - **Inhibitory Plasticity Rule:** Enhances dendritic compartmentalization to improve feature discrimination.
 - **Simulations for NFBP Learning:** Includes both clustered and randomly distributed synapses to test learning capabilities.
--
--
 
 ## Running Simulations
 
-### 1. Model Initialization
+### 1.
 
-Navigate to the **models/** directory and execute the main simulation script:
-
-```bash
-python run_simulation.py
-```
-
-### 2. Reproducing Figures
-
-To generate figures as presented in the manuscript, navigate to the **simulations/** directory and run:
+Navigate to the **experiments/** directory from were you can find all the different simulations run in the paper:
 
 ```bash
-python generate_figures.py
+cd  experiments/
 ```
 
-### 3. Jupyter Notebook Analysis
+- **cluster_inh_spill_combine_2** comments describing the simulation here please
+- **cluster_inh_spill_example_3**
+- **distribute_spill_inh_10**
+- **distribute_spill_9**
+- **cluster_spill_example_1**
+- **cluster_spill_combine_0**
+- **xor_dist2_outinh_5**
+- **xor_dist2_inh_7**
+- **xor_dist1_outinh_4**
+- **xor_dist1_inh_6**
 
-For interactive analysis, open a Jupyter Notebook:
+### 2. 
+
+To start a simulation go to, for example, the first folder:
 
 ```bash
-jupyter notebook notebooks/analysis.ipynb
+cd  cluster_inh_spill_combine_2
 ```
+
+compile mechanisms in this folder:
+
+```bash
+nrnivmodl ../../mechanisms/
+```
+
+and then run:
+
+```bash
+python paralLocal_xorSpillover.py
+```
+
+### 3. plotting
+
+Plotting is done in the notebook **plot.ipynb**. For interactive analysis open it using:
+
+```bash
+jupyter-lab plot.ipynb
+```
+
 
 ## Data Availability
 
