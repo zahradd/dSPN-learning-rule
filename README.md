@@ -39,12 +39,7 @@ cd  experiments/
 - **cluster_inh_spill_combine_2** comments describing the simulation here please
 - **cluster_inh_spill_example_3**
 - **distribute_spill_inh_10**
-- **distribute_spill_9**
-- **cluster_spill_example_1**
-- **cluster_spill_combine_0**
-- **xor_dist2_outinh_5**
 - **xor_dist2_inh_7**
-- **xor_dist1_outinh_4**
 - **xor_dist1_inh_6**
 
 ### 2. 
