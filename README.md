@@ -85,7 +85,7 @@ If you use this code, please cite the following paper:
 @article{khodadadi2025dspn,
   author = {Khodadadi, Zahra and Trpevski, Daniel and Lindroos, Robert and Hellgren Kotaleski, Jeanette},
   title = {Local, calcium- and reward-based synaptic learning rule that enhances dendritic nonlinearities can solve the nonlinear feature binding problem},
-  journal = {Journal TBD},
+  journal = {eLife},
   year = {2025}
 }
 ```
