@@ -36,17 +36,15 @@ Navigate to the **experiments/** directory from were you can find all the differ
 cd  experiments/
 ```
 
-- **cluster_inh_spill_example_3** comments describing the simulation here please
-- **distribute_spill_inh_10**
-- **xor_dist2_inh_7**
-- **xor_dist1_inh_6**
+- **clustered_training_experiments​** comments describing the simulation here please
+- **distributed_training_experiments**
 
 ### 2. 
 
 To start a simulation go to, for example, the first folder:
 
 ```bash
-cd  cluster_inh_spill_example_3
+cd  clustered_training_experiments​
 ```
 
 compile mechanisms in this folder:
