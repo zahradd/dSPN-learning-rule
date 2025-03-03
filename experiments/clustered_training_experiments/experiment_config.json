@@ -3,19 +3,19 @@
     {
       "name": "experiment1",
       "num_epochs":1,
-      "include_inhibition":1,
-      "num_unspecific_features":144,
-      "task_type":"xor",
+      "include_inhibition":0,
+      "num_unspecific_features":108,
+      "task_type":"3example",
       "dendlist": [[14.0, 41.0]],
       "comment": "Figure 3 emaple   "
     },
     {
       "name": "experiment2",
       "num_epochs":1,
-      "include_inhibition":1,
-      "num_unspecific_features":144,
-      "task_type":"xor",
-      "dendlist": [[14, 4], [14, 5], [14, 12], [14, 15], [14, 21], [14, 22], [14, 24], [14, 26]],
+      "include_inhibition":0,
+      "num_unspecific_features":108,
+      "task_type":"3example",
+      "dendlist":[[14.0, 41.0]],
       "comment": "Figure 4 combination"
     },
     {
@@ -23,36 +23,62 @@
       "num_epochs":1,
       "include_inhibition":1,
       "num_unspecific_features":144,
-      "task_type":"xor",
-      "dendlist": [[14, 28], [14, 35], [14, 36], [14, 37], [14, 41], [14, 46], [14, 51]],
-      "comment": "Figure 4 distance example "
+      "task_type":"combination",
+      "dendlist": [[14.0, 41.0]],
+      "comment": "Figure 3 emaple   "
     },
     {
       "name": "experiment4",
       "num_epochs":1,
       "include_inhibition":1,
       "num_unspecific_features":144,
-      "task_type":"xor",
-      "dendlist": [[14, 47], [14, 47], [14, 51], [14, 52], [14, 53], [14, 3], [14, 29]],
-      "comment": "Figure 4 distance example "
+      "task_type":"combination",
+      "dendlist":[[14.0, 41.0]],
+      "comment": "Figure 4 combination"
     },
     {
-       "name": "experiment5",
+      "name": "experiment5",
+      "num_epochs":1,
+      "include_inhibition":1,
+      "num_unspecific_features":144,
+      "task_type":"3example",
+      "dendlist": [[3., 35.],[3., 53.] ,[ 4, 35] ,[4, 53.],[ 8, 36.],[8, 53],[ 12, 36.],[12,35],[ 22, 53],[ 22,35],[ 26, 53],[26., 35],[28.,9],[ 28, 10],[34, 5],[ 34 ,14],[37, 5],[37, 14],[41, 21],[ 41, 24],[46, 5],[ 46, 14],[47, 21],[ 47 ,24],[51, 5],[51, 14],[57,21],[57, 24],[ 52, 5],[52, 14],[ 37, 21],[47, 24]],
+
+      "comment": "Figure 4 distal  example "
+    },
+    {
+      "name": "experiment6",
+      "num_epochs":1,
+      "include_inhibition":1,
+      "num_unspecific_features":144,
+      "task_type":"3example",
+      "dendlist": [[17, 40], [18, 45], [29, 56.], [17, 45], [18, 56], [29, 40], [2, 33], [17, 38], [20, 44], [27, 50],
+                  [33, 27], [38, 20], [44, 2], [50, 20], [1, 31], [7, 32], [6, 39], [16, 42], [23, 49], [25, 54],
+                  [32, 1], [39, 7], [49, 16], [42, 25], [31., 23], [54., 6], [55, 6], [1, 49], [16, 39],
+              [49,25], [45, 29], [50, 27]]  ,
+      "comment": "Figure 4 prox example "
+    },
+    {
+       "name": "experiment7",
        "num_epochs":1,
-       "include_inhibition":1,
-       "num_unspecific_features":144,
-      "task_type":"xor",
-       "dendlist": [[14, 28], [14, 35], [14, 36], [14, 37], [14, 41], [14, 46], [14, 51]],
-       "comment": "Figure 4 distance example with inhibitory "
+       "include_inhibition":0
+       "num_unspecific_features":108,
+      "task_type":"3example",
+       "dendlist": [[3., 35.],[3., 53.] ,[ 4, 35] ,[4, 53.],[ 8, 36.],[8, 53],[ 12, 36.],[12,35],[ 22, 53],[ 22,35],[ 26, 53],[26., 35],[28.,9],[ 28, 10],[34, 5],[ 34 ,14],[37, 5],[37, 14],[41, 21],[ 41, 24],[46, 5],[ 46, 14],[47, 21],[ 47 ,24],[51, 5],[51, 14],[57,21],[57, 24],[ 52, 5],[52, 14],[ 37, 21],[47, 24]]
+
+       "comment": "Figure 4 distal example with inhibitory "
      },
      {
-       "name": "experiment6",
+       "name": "experiment8",
        "num_epochs":1,
-       "include_inhibition":1,
-       "num_unspecific_features":144,
-      "task_type":"xor",
-       "dendlist": [[14, 47], [14, 47], [14, 51], [14, 52], [14, 53], [14, 3], [14, 29]],
-       "comment": "Figure 4 distance example "
+       "include_inhibition":0,
+       "num_unspecific_features":108,
+      "task_type":"3example",
+       "dendlist":[[17, 40], [18, 45], [29, 56.], [17, 45], [18, 56], [29, 40], [2, 33], [17, 38], [20, 44], [27, 50],
+                   [33, 27], [38, 20], [44, 2], [50, 20], [1, 31], [7, 32], [6, 39], [16, 42], [23, 49], [25, 54],
+                   [32, 1], [39, 7], [49, 16], [42, 25], [31., 23], [54., 6], [55, 6], [1, 49], [16, 39],
+               [49,25], [45, 29], [50, 27]]  ,
+       "comment": "Figure 4 prox example "
      }
   ]
 }

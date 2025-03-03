@@ -1200,7 +1200,7 @@ def makew_inex1(synNumber,ra,spillornot,num_syn,taskjob):
             inputs_XOR.append(combi.all_combinations[i])
        for i in combi.indices_none:
             inputs_none.append(combi.all_combinations[i])  
-       if taskjob=='xor'   :  
+       if taskjob=='combination'   :  
        # input_combination=inputs_XOR
            input_combination=inputs_XOR
        elif taskjob=='linear':
