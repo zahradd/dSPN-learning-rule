@@ -11,25 +11,7 @@ from random import randrange
 
 from collections import Counter
 
-def randomListold(m, n,distribution,rank):
-    random.seed(43+rank)
 
-    # Create an array of size m where
-    # every element is initialized to 0
-    arr = [0] * m;
-     
-    # To make the sum of the final list as n
-    for i in range(n) :
- 
-        # Increment any random element
-        # from the array by 1
-        if distribution=='random':
-           arr[randint(0, n) % m] += 1;
-        elif distribution=='uniform':
-           arr[i % m] += 1;
-  
-    # Print the generated list
-    return arr, m
 
 def randomList(m, n, distribution, rank,length_list):
     np.random.seed(43 + rank)
@@ -58,9 +40,7 @@ def randomList(m, n, distribution, rank,length_list):
     return arr, m 
 
 
-# Driver code
-def multiples(value, length):
-    return [value * i for i in range(1, length + 1)]
+
 
 def getSpiketrain(train1,tstarts,synNumber1,inputDict,assignInputTask,timespan,NumberOfspike,distribution,rank):
         
@@ -154,31 +134,7 @@ def makeTrainingBatches(epoc, tasks, batch, expectedOutput,rank):
 
        
 
-def makeRandomTrain(num):
-    train=[]
-    tr=['10','01','11','00','10','01','11','00','10','01','11','00']
-    
-    tr0=['10','01','11','00','10','01','11','00','10','01','11','00']
 
-    # tr=['10','10','10','10','10','10','10','10','10','10','10','10']
-
-    if num%12==0:
-       n=int(num/12)
-       for i in range(n):
-           if i==0:
-               train.extend(tr)
-           elif i==79:
-               
-               train.extend(tr0)
-           else:
-                random.shuffle(tr)
-                train.extend(tr)
-    else:
-        print('the number of training should be multiple of 12')
-        
-    return train
-    
-          
         
  
    
@@ -285,48 +241,7 @@ def SetDendPosition(cell,dendl,num_syn,clusterOrDist,distribution,rank):
 
 
     return    DendPosition1,DendPosition,secName,Output,seclist
-def SetDendPosition_differentdend(cell,dendl,num_syn,clusterOrDist,distribution,rank,length_list):
-    seclist=h.SectionList()
-    secName=[] 
-    DendPosition={}
-    DendPosition1={}
-    for i ,sec in enumerate(dendl):
-        dend_name   = 'dend[' + str(int(dendl[i])) + ']'
-        for sec in cell.dendlist:
-            if sec.name() == dend_name:
-                seclist.append(sec=sec)
-                secName.append(dend_name)
-    # ff=0
 
-    arr,m=randomList(len(dendl), num_syn,distribution,rank,length_list);
-        
-   # print('arr',arr)
-    random.seed(546+rank)
-
-    Input =list(range(num_syn))
-    # random.shuffle(Input)
-    
-    Inputt = iter(Input)
-    Output = [list(islice(Inputt, elem))
-            for elem in arr]
-    # random.randint(1, 9)*0.1
-    d={}
-    for  e,list_e in enumerate(Output):
-        listma=[]
-        for f in list_e:
-            listma.append([f,random.uniform(clusterOrDist[0] * 10, clusterOrDist[1] * 10)*0.1])
-        d[e]=listma    
-        
-    for  i2_e,sec_e in enumerate(seclist):
-        sec_e.nseg=5
-        listd=[]
-        for i in  d[i2_e]:
-            listd.append(i)
-        DendPosition[sec_e]=listd
-        DendPosition1[sec_e.name()]=listd
-
-
-    return    DendPosition1,DendPosition,secName,Output,seclist
 def set_bg_noise(cell,              \
                  ratio=0,    \
                  cell_type='D1',    \
@@ -376,99 +291,7 @@ def set_bg_noise(cell,              \
         
     
     return Syn, nc, ns
-def set_bg_noise1(cell,              \
-                 ratio=0,    \
-                 cell_type='D1',    \
-                 syn_fact=False,    \
-                 gabaMod=False,     \
-                 delays=[]     ):
-    
-    ns      = {}
-    nc      = {}
-    Syn     = {}
-    for s,sec in enumerate(cell.allseclist):
-        
-        # set bg noise----------------------------------
-        
-        if cell_type == 'D1':
-            gbase = 0.25e-3 #previusly it was 0.3
-        else:
-            gbase = 0.2e-3
-        
-        if len(delays) == 0:
-            delay = 0
-        else:
-            delay = delays[s]
-            
-        # create a glut synapse (glutamate)
-        random_synapse(ns, nc, Syn, sec, 0.5,           \
-                                NS_interval=80,    \
-                                NC_conductance=gbase,       \
-                                NS_start=delay )
-        # create a gaba synapse (Exp2Syn)
-        random_synapse(ns, nc, Syn, sec, 0.1,           \
-                                Type='gaba',                \
-                                NS_interval=50,       \
-                                NC_conductance=1*1e-3 ,     \
-                                NS_start=delay      )
-        
-        Syn[sec.name()+'_glut'].ratio = ratio  
-        
-        if syn_fact:
-            Syn[sec.name()+'_glut'].ampa_scale_factor = syn_fact[0]
-            Syn[sec.name()+'_glut'].nmda_scale_factor = syn_fact[1]
-            
-        
-        if gabaMod:
-            # scale gaba
-            nc[sec.name()+'_gaba'].weight[0] = gbase * 3 * gabaMod
-        
-    
-    return Syn, nc, ns
-def set_bg_noise_withconducancechanges(cell,  glut_conductance,gaba_conductance,ratio=0, cell_type='D1',syn_fact=False, gabaMod=False, delays=[]):
-    
-    ns      = {}
-    nc      = {}
-    Syn     = {}
-    for s,sec in enumerate(cell.allseclist):
-        
-        # set bg noise----------------------------------
-        
-        if cell_type == 'D1':
-            gbase = 0.3e-3 #previusly it was 0.3
-        else:
-            gbase = 0.2e-3
-        
-        if len(delays) == 0:
-            delay = 0
-        else:
-            delay = delays[s]
-            
-        # create a glut synapse (glutamate)
-        random_synapse(ns, nc, Syn, sec, 0.5,           \
-                                NS_interval=80,    \
-                                NC_conductance=glut_conductance,       \
-                                NS_start=delay )
-        # create a gaba synapse (Exp2Syn)
-        random_synapse(ns, nc, Syn, sec, 0.1,           \
-                                Type='gaba',                \
-                                NS_interval=50,       \
-                                NC_conductance=gaba_conductance ,     \
-                                NS_start=delay      )
-        
-        Syn[sec.name()+'_glut'].ratio = ratio  
-        
-        if syn_fact:
-            Syn[sec.name()+'_glut'].ampa_scale_factor = syn_fact[0]
-            Syn[sec.name()+'_glut'].nmda_scale_factor = syn_fact[1]
-            
-        
-        if gabaMod:
-            # scale gaba
-            nc[sec.name()+'_gaba'].weight[0] = gbase * 3 * gabaMod
-        
-    
-    return Syn, nc, ns
+
 
 def random_synapse(ns, nc, Syn, sec, x,         \
                 Type='glut',                    \
@@ -745,62 +568,7 @@ def putSynapse_justSteepANncor(cell,spine_sec,secEx,pos,tra,w,tresh,stORsh):
     ncNmda.weight[0] = 1
     return synAmpa,synNmda,ncAmpa,ncNmda,stim
 
-def putSynapse_justSteepANncorwratio(cell,spine_sec,secEx,pos,tra,w,tresh,stORsh,gmaxx,gmaxampa):
 
-    stim  = h.VecStim()
-    spike_times =tra
-    spikes_vector = h.Vector(spike_times) # you put on vector just an spike time 
-    stim.play(spikes_vector)
-
-    synAmpa = h.adaptive_shom_AMPA(0.5,sec=spine_sec)
-    synNmda = h.adaptive_shom_NMDA(0.5,sec=spine_sec)
-    synNmda.w0=w
-    synNmda.treshf=tresh
-    synNmda.eta=stORsh[0]
-    synNmda.alpha=stORsh[1]
-    synNmda.mg=stORsh[2]
-    synNmda.rate_ltd=0.003
-    synNmda.rate_ltp=0.000015
-    synNmda.rate_ltd_thrsh=0.0000004
-    synNmda.rate_ltp_tresh=0.0000001
-
-    synAmpa.gmax=gmaxampa
-    synNmda.gmax=gmaxx
-    ncAmpa  = h.NetCon(stim , synAmpa)
-    ncNmda  = h.NetCon(stim , synNmda)
-    ncAmpa.weight[0] = 1
-    ncNmda.weight[0] = 1
-    return synAmpa,synNmda,ncAmpa,ncNmda,stim
-
-
-def putSynapse_justSteepANncorwratio1(cell,spine_sec,secEx,pos,tra,w,tresh,stORsh,gmaxx,gmaxampa):
-
-    stim  = h.VecStim()
-    spike_times =tra
-    spikes_vector = h.Vector(spike_times) # you put on vector just an spike time 
-    stim.play(spikes_vector)
-
-    synAmpa = h.adaptive_shom_AMPA(0.5,sec=spine_sec)
-    synNmda = h.adaptive_shom_NMDA(0.5,sec=spine_sec)
-    synNmda.w0=w
-    synNmda.treshf=tresh
-    synNmda.eta=stORsh[0]
-    synNmda.alpha=stORsh[1]
-    synNmda.mg=stORsh[2]
-    synNmda.rate_ltd=0.003
-    synNmda.rate_ltp=0.000015
-    synNmda.rate_ltd_thrsh=0.0000004
-    synNmda.rate_ltp_tresh=0.0000001
-
-    synAmpa.gmax=gmaxampa
-    synNmda.gmax=gmaxx
-    ncAmpa  = h.NetCon(stim , synAmpa)
-    ncNmda  = h.NetCon(stim , synNmda)
-    ncAmpa.weight[0] = 1
-    ncNmda.weight[0] = 1
-
-    
-    return synAmpa,synNmda,ncAmpa,ncNmda,stim
 def putSynapse_justSteepANn_acc(cell,spine_sec,secEx,pos,tra,w,tresh,stORsh):
     stim  = h.VecStim()
     spike_times =tra
@@ -893,75 +661,10 @@ def custom_random():
 
 
 
-def putSynapse_in1(cell,sec,tra,w,stORsh,pos,magOrnot):
-        #    difine syanpses
-    tra2=[]   
-    stimulator  = h.VecStim()
-    #    tra = [x+10 for x in tra]
-    #tra1 = [xtra for xtra in tra]
-    if tra!=[]:
-           for intra, value in enumerate(tra):
-                    for i in range(0, 100,2):
-                        tra2.append(value + i)
-
-   
-          # print('fffffffffffffff',tra2)
-                   # tra2.append(value+280)
-    spike_times =tra2
-
-#    print('type tra',type(tra))
-#    syn = h.glutamate_ica_nmda(0.95,sec)
-    if magOrnot==1:
-  #  syn = h.Gaba_p1(pos,sec=sec)
-       syn = h.Gaba_mag(pos,sec=sec)
-    else:
-       syn = h.Gaba_p1(pos,sec=sec)
-
-    syn.wmax=0.006
-    syn.w0=w*stORsh[3]
-    syn.e =-65
-#    print('ratio',(3.5/w))
-    spikes_vector = h.Vector(spike_times) # you put on vector just an spike time 
-    stimulator.play(spikes_vector)       
-    nc  = h.NetCon(stimulator , syn)
-    nc.weight[0] = 1
-    return syn,nc,stimulator
 
 
 
-def putSynapse_in3(cell,sec,tra,w,stORsh,pos,magOrnot,wmax,interval):
-        #    difine syanpses
-    tra2=[]   
-    stimulator  = h.VecStim()
-    #    tra = [x+10 for x in tra]
-    #tra1 = [xtra for xtra in tra]
-    if tra!=[]:
-           for intra, value in enumerate(tra):
-                    for i in range(0, 100,interval):
-                        tra2.append(value + i)
 
-   
-          # print('fffffffffffffff',tra2)
-                   # tra2.append(value+280)
-    spike_times =tra2
-
-#    print('type tra',type(tra))
-#    syn = h.glutamate_ica_nmda(0.95,sec)
-    if magOrnot==1:
-  #  syn = h.Gaba_p1(pos,sec=sec)
-       syn = h.Gaba_mag(pos,sec=sec)
-    else:
-       syn = h.Gaba_p1(pos,sec=sec)
-
-    syn.wmax=wmax
-    syn.w0=w*stORsh[3]
-    syn.e =-65
-#    print('ratio',(3.5/w))
-    spikes_vector = h.Vector(spike_times) # you put on vector just an spike time 
-    stimulator.play(spikes_vector)       
-    nc  = h.NetCon(stimulator , syn)
-    nc.weight[0] = 1
-    return syn,nc,stimulator
 
 def putSynapse_in4(cell,sec,tra,w,stORsh,pos,magOrnot,wmax,interval, tminrate , tmaxrate , wrate):
         #    difine syanpses
@@ -989,44 +692,6 @@ def putSynapse_in4(cell,sec,tra,w,stORsh,pos,magOrnot,wmax,interval, tminrate , 
     syn.tminrate=tminrate
     syn.tmaxrate=tmaxrate
     syn.wrate=wrate
-#    print('ratio',(3.5/w))
-    spikes_vector = h.Vector(spike_times) # you put on vector just an spike time 
-    stimulator.play(spikes_vector)       
-    nc  = h.NetCon(stimulator , syn)
-    nc.weight[0] = 1
-    return syn,nc,stimulator
-def putSynapse_in2(cell,sec,tra,w,stORsh,pos,magOrnot):
-        #    difine syanpses
-    stimulator  = h.VecStim()
-#    tra = [x+10 for x in tra]
-    tra1 = [xtra+random.randrange(150)-20 for xtra in tra]
-    tra2=[]
-    if tra1!=[]:
-        for intra,itra in  enumerate(tra1):
-            tra2.append(tra1[intra])
-            tra2.append(tra1[intra]+5)
-            tra2.append(tra1[intra]+10)
-            tra2.append(tra1[intra]+15)
-            tra2.append(tra1[intra]+20)
-            tra2.append(tra1[intra]+25)
-            tra2.append(tra1[intra]+30)
-            tra2.append(tra1[intra]+35)
-            tra2.append(tra1[intra]+40)
-            tra2.append(tra1[intra]+45)
-            tra2.append(tra1[intra]+50)
-
-    spike_times =tra2
-#    print('type tra',type(tra))
-#    syn = h.glutamate_ica_nmda(0.95,sec)
-
-    if magOrnot==1:
-#  syn = h.Gaba_p1(pos,sec=sec)
-         syn = h.Gaba_mag(pos,sec=sec)
-    else:
-         syn = h.Gaba_p1(pos,sec=sec)    
-    syn.wmax=0.006
-    syn.w0=w*stORsh[3]
-    syn.e =-65
 #    print('ratio',(3.5/w))
     spikes_vector = h.Vector(spike_times) # you put on vector just an spike time 
     stimulator.play(spikes_vector)       
