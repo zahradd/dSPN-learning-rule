@@ -91,7 +91,7 @@ for cell_index in [10]:
     cell = build.MSN(params=par_path, morphology=morphology_path, variables=parameters)
 
 newClass = pa.justSteep(cell, rank, v)
-w_exe, w_exef, w_in, w_inf, w_exe_cor, w_cortical, perform, secname, tm, tresh, tresh_cor, calMax, calMax_cor, train, checkTreshold_i, checkCalMax_i, checkDLtype_cor, checkDLtype, checkTreshold_imin = newClass.beforMain()
+w_exe, w_exef, w_in, w_inf, w_exe_cor, w_cortical, perform, secname, tm, tresh, tresh_cor, calMax, calMax_cor, train, checkTreshold_i, checkCalMax_i, checkDLtype_cor, checkDLtype, checkTreshold_imin = newClass.beforMain(selected_experiment)
 
 # Gather results
 wFirst = comm.gather(w_exe, root)

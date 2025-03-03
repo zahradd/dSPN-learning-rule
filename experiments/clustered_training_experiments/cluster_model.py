@@ -137,7 +137,7 @@ class justSteep:
                        nog=1
                        
                 return nog
-       def callbb(self,expect,tstops,tstarts,w_exe,w_in,dend_exe,dendinput,dendinput_inh,tresh,noghte1,train1,stORsh,dendlst,w_exe_cor,dendinput_cor,tresh_cor,num_syn,num_syn_inh):
+       def callbb(self,expect,tstops,tstarts,w_exe,w_in,dend_exe,dendinput,dendinput_inh,tresh,noghte1,train1,stORsh,dendlst,w_exe_cor,dendinput_cor,tresh_cor,num_syn,num_syn_inh,corticalnoise):
  
         
             justSteep.create_dopamine()
@@ -146,8 +146,7 @@ class justSteep:
             seclist2,secName,pos=func.makeSectionList(self.cell,dendlst,1,num_syn)
             seclist2_inh,secName_inh,pos_inh=func.makeSectionList(self.cell,dendlst,1,num_syn_inh)
 
-            dend_exe3=list(set(dend_exe) - set(dendlst)) + list(set(dendlst) - set(dend_exe))
-            seclist20_cor,secName_cor,pos_cor=func.makeSectionList3(self.cell,dend_exe,0,num_syn,4)  
+            seclist20_cor,secName_cor,pos_cor=func.makeSectionList3(self.cell,dend_exe,0,num_syn,corticalnoise//36)  
             list_syn_ampa=[]
             list_nc_ampa=[]
             list_stimulator=[]
@@ -342,22 +341,22 @@ class justSteep:
                 tstops.append(tstarts[-1]+800)  
                 tstops.sort()  
                 return tstarts,tstops
-       def beforMain(self):
+       def beforMain(self,selected_experiment):
             # stORsh=['eta','alpha','mg','inh or not','example reward punish regular','general or non dopamine']
-            stORsh=[0.381679389,0.062,1,1,'else','non']
+            stORsh=[0.381679389,0.062,1,selected_experiment["include_inhibition"],'else','non']
             nDend=2
             num_syn=4*5
             num_syn_inh=4*1
             synNumber=nDend*num_syn
             synNumber_inh=nDend*num_syn_inh
-            corticalnoise=144
+            corticalnoise=selected_experiment["num_unspecific_features"]
             batch=12
-            epoc=1
+            epoc=selected_experiment["num_epochs"]
             num=batch*epoc
             noghte1=[]
             np.random.seed(corticalnoise)
 
-            taskjob='3example'
+            taskjob=selected_experiment["task_type"]
             w_exe,w_in=func.makew_inex1(synNumber,self.rank,'spill',num_syn,taskjob)
             w_exe_cor=abs(np.random.normal(0.25, 0.05, size=(1, corticalnoise)))
             # dend_exe=[2, 3, 4, 5, 8, 9, 12, 13, 15, 17, 18, 20, 21, 22, 24, 26, 27, 28, 29, 35, 36, 37, 38, 40, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 56, 57]
@@ -396,7 +395,7 @@ class justSteep:
 
          
      
-            vm,tmfff,tm,Rec_Wg_NMDA,Rec_Wg_GABA,Rec_Wg_NMDA_extraInput,secName,checkD,checkD_cor,checkDnaro,checkDnaro_cor, checkD_i,checkDnaro_i,checkDLtype_cor,checkDLtype,checkD_imin=justSteep.callbb(self,expect,tstops,tstarts,w_exe,w_in,dend_exe,dendinput,dendinput_inh,tresh,noghte1,train1,stORsh,dendlst,w_exe_cor,dendinput_cor,tresh_cor,num_syn,num_syn_inh)
+            vm,tmfff,tm,Rec_Wg_NMDA,Rec_Wg_GABA,Rec_Wg_NMDA_extraInput,secName,checkD,checkD_cor,checkDnaro,checkDnaro_cor, checkD_i,checkDnaro_i,checkDLtype_cor,checkDLtype,checkD_imin=justSteep.callbb(self,expect,tstops,tstarts,w_exe,w_in,dend_exe,dendinput,dendinput_inh,tresh,noghte1,train1,stORsh,dendlst,w_exe_cor,dendinput_cor,tresh_cor,num_syn,num_syn_inh,corticalnoise)
 
           
              ##############################################################
