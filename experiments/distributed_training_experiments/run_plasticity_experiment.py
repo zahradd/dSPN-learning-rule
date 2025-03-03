@@ -1,6 +1,9 @@
 import plasticity_model as pa
 import sys
 import os
+json_filename =  "experiment1.json" # Picks the experiment
+
+
 import json
 import time
 import numpy as np
@@ -18,9 +21,7 @@ t0 = time.time()
 
 # Define paths
 cur_dir = os.path.dirname(os.path.abspath(__file__))
-print('gggggggggggggggggggggggggggggggg',cur_dir)
 model_dir = os.path.abspath(os.path.join(cur_dir, '..', '..', 'model'))
-print('gggggggggggggggggggggggggggggggg',model_dir)
 
 sys.path.append(model_dir)
 
@@ -38,7 +39,6 @@ morphology_path = os.path.join(model_dir, "MSN_morphology_D1.swc")
 experiments_dir = os.path.join(cur_dir, "experiments_config")
 
 # Use the first JSON file found (or modify to loop over multiple files)
-json_filename =  "experiment1.json" # Picks the experiment
 json_path = os.path.join(experiments_dir, json_filename)
 
 # Extract the experiment name from the JSON filename (removing '.json')

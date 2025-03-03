@@ -6,16 +6,11 @@ model_dir = os.path.join(cur_dir, '..', '..',  '..','model')
 updatedmodel_dir = os.path.abspath(model_dir)
 sys.path.append(updatedmodel_dir)  
 from neuron import h
-import  MSN_builder as build
-import pickle
 import dFunc as func
 # Load model mechanisms
 import neuron as nrn
-import random
-import matplotlib.pyplot as plt
 import numpy as np
 import efel
-import copy
 import operator 
 import spine as sp
 current_dir = os.path.abspath(__file__)
