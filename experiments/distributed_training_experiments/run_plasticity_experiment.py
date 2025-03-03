@@ -96,30 +96,30 @@ fileName = f"{experiment_name}"  # Use JSON filename as the experiment name
 if os.path.exists("/scratch"):
     NETWORK_DIR = '/scratch/snx3000/bp000380/Plasticity.data'  # HPC path
 else:
-    NETWORK_DIR = os.path.join(os.getcwd(), "PlasticityResults")  # Local directory
+    NETWORK_DIR = os.path.join(os.getcwd(), "distributed_training_results_1")  # Local directory
 
 # Create the experiment-specific folder
 experiment_dir = os.path.join(NETWORK_DIR, fileName)
 os.makedirs(experiment_dir, exist_ok=True)  # Ensure the directory exists
 
 if rank == 0:
-    func.save_obj(wFirst, os.path.join(experiment_dir, f"{fileName}_WFirst"))
-    func.save_obj(wEnd, os.path.join(experiment_dir, f"{fileName}_Wend"))
-    func.save_obj(wInFirst, os.path.join(experiment_dir, f"{fileName}_WInFirst"))
-    func.save_obj(wInEnd, os.path.join(experiment_dir, f"{fileName}_WInEnd"))
-    func.save_obj(performs, os.path.join(experiment_dir, f"{fileName}_performance"))
-    func.save_obj(secNames, os.path.join(experiment_dir, f"{fileName}_secNames"))
-    func.save_obj(tms, os.path.join(experiment_dir, f"{fileName}_tms"))
-    func.save_obj(treshs, os.path.join(experiment_dir, f"{fileName}_tresh"))
-    func.save_obj(calMaxs, os.path.join(experiment_dir, f"{fileName}_calMaxs"))
-    func.save_obj(train, os.path.join(experiment_dir, f"{fileName}_train"))
-    func.save_obj(treshs_in, os.path.join(experiment_dir, f"{fileName}_treshs_in"))
-    func.save_obj(treshsmin_in, os.path.join(experiment_dir, f"{fileName}_treshsmin_in"))
-    func.save_obj(calMaxs_in, os.path.join(experiment_dir, f"{fileName}_calMaxs_in"))
-    func.save_obj(checkDLtypes, os.path.join(experiment_dir, f"{fileName}_ltype"))
-    func.save_obj(inputListSyns, os.path.join(experiment_dir, f"{fileName}_inputListSyn"))
-    func.save_obj(Outputs, os.path.join(experiment_dir, f"{fileName}_output"))
-    func.save_obj(inputListSyns_in, os.path.join(experiment_dir, f"{fileName}_inputListSyn_in"))
-    func.save_obj(Outputs_in, os.path.join(experiment_dir, f"{fileName}_output_in"))
-    func.save_obj(DendPositions, os.path.join(experiment_dir, f"{fileName}_DendPositions"))
+    func.save_obj(wFirst, os.path.join(NETWORK_DIR, f"{fileName}_WFirst"))
+    func.save_obj(wEnd, os.path.join(NETWORK_DIR, f"{fileName}_Wend"))
+    func.save_obj(wInFirst, os.path.join(NETWORK_DIR, f"{fileName}_WInFirst"))
+    func.save_obj(wInEnd, os.path.join(NETWORK_DIR, f"{fileName}_WInEnd"))
+    func.save_obj(performs, os.path.join(NETWORK_DIR, f"{fileName}_performance"))
+    func.save_obj(secNames, os.path.join(NETWORK_DIR, f"{fileName}_secNames"))
+    func.save_obj(tms, os.path.join(NETWORK_DIR, f"{fileName}_tms"))
+    func.save_obj(treshs, os.path.join(NETWORK_DIR, f"{fileName}_tresh"))
+    func.save_obj(calMaxs, os.path.join(NETWORK_DIR, f"{fileName}_calMaxs"))
+    func.save_obj(train, os.path.join(NETWORK_DIR, f"{fileName}_train"))
+    func.save_obj(treshs_in, os.path.join(NETWORK_DIR, f"{fileName}_treshs_in"))
+    func.save_obj(treshsmin_in, os.path.join(NETWORK_DIR, f"{fileName}_treshsmin_in"))
+    func.save_obj(calMaxs_in, os.path.join(NETWORK_DIR, f"{fileName}_calMaxs_in"))
+    func.save_obj(checkDLtypes, os.path.join(NETWORK_DIR, f"{fileName}_ltype"))
+    func.save_obj(inputListSyns, os.path.join(NETWORK_DIR, f"{fileName}_inputListSyn"))
+    func.save_obj(Outputs, os.path.join(NETWORK_DIR, f"{fileName}_output"))
+    func.save_obj(inputListSyns_in, os.path.join(NETWORK_DIR, f"{fileName}_inputListSyn_in"))
+    func.save_obj(Outputs_in, os.path.join(NETWORK_DIR, f"{fileName}_output_in"))
+    func.save_obj(DendPositions, os.path.join(NETWORK_DIR, f"{fileName}_DendPositions"))
     

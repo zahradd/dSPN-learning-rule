@@ -1,0 +1,17 @@
+{
+    "clustered_training_results_0": [
+        "exreriment_1",  
+        "exreriment_2",
+        "exreriment_3",
+        "exreriment_4"
+          
+    ],
+       "distributed_training_results_1": [
+       "exreriment1",  
+       "exreriment2",
+       "exreriment3",
+       "exreriment4"
+          
+       ]
+
+}
