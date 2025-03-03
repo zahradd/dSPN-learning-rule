@@ -28,44 +28,66 @@ The model demonstrates how a **single neuron can solve the Nonlinear Feature Bin
 
 ## Running Simulations
 
-### 1.
+### 1. Navigate to the `experiments/` directory
 
-Navigate to the **experiments/** directory from were you can find all the different simulations run in the paper:
-
-```bash
-cd  experiments/
-```
-
-- **clustered_training_experiments​** comments describing the simulation here please
-- **distributed_training_experiments**
-
-### 2. 
-
-To start a simulation go to, for example, the first folder:
+This directory contains all the different simulation setups used in the paper:
 
 ```bash
-cd  clustered_training_experiments​
+cd experiments/
 ```
 
-compile mechanisms in this folder:
+The main subdirectories include:
+
+- **`clustered_training_experiments/`**  
+  - This folder contains experiments focused on clustered synaptic inputs and their effects on plasticity.
+  - It includes scripts for running cluster-based plasticity experiments and analyzing results.
+
+- **`distributed_training_experiments/`**  
+  - This folder contains experiments investigating distributed synaptic inputs and their impact on plasticity.
+  - The simulations in this directory distribute synaptic activity across a wider range of dendritic locations.
+
+### 2. Running a Simulation
+
+To start a simulation, navigate to the appropriate folder. For example, for the clustered training experiments:
+
+```bash
+cd clustered_training_experiments/
+```
+
+#### **Compiling Mechanisms**
+Before running simulations, ensure that the necessary NEURON mechanisms are compiled:
 
 ```bash
 nrnivmodl ../../mechanisms/
 ```
 
-and then run:
+#### **Running the Simulation**
+Once compiled, run the simulation using:
 
 ```bash
-python paralLocal_xorSpillover.py
+python run_cluster_experiment.py
 ```
 
-### 3. plotting
+For distributed training experiments, navigate to that directory and run:
 
-Plotting is done in the notebook **plot.ipynb**. For interactive analysis open it using:
+```bash
+cd ../distributed_training_experiments/
+python run_plasticity_experiment.py
+```
+
+### 3. Plotting Results
+
+After running the simulations, results can be visualized using the provided Jupyter notebooks.
+
+For interactive analysis, open the plotting notebook:
 
 ```bash
 jupyter-lab plot.ipynb
 ```
+
+This notebook contains scripts for visualizing synaptic plasticity changes, performance metrics, and other relevant analyses.
+
+
 
 
 ## Data Availability
