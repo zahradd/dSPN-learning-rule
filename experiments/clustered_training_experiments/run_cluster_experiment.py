@@ -1,6 +1,6 @@
 experiment_index = 1  # Change this to run different experiments
 
-import Xor_spillOver as pa
+import cluster_model as pa
 import sys
 import os
 import json
@@ -60,7 +60,7 @@ par_path = os.path.join(updatedmodel_dir, par)
 morphology_path = os.path.join(updatedmodel_dir, morphology)
 
 # Load JSON file with experiment settings
-json_path = os.path.join(cur_dir, '..', "cluster_experiments.json")
+json_path = os.path.join(cur_dir, '..', "experiment_config.json")
 json_path = os.path.normpath(json_path)
 
 

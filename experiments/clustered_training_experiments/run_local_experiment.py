@@ -9,7 +9,7 @@ sys.path.append(updatedmodel_dir)
 import time
 import numpy as np
 import MSN_builder as build
-import Xor_spillOver as pa
+import cluster_model as pa
 import pickle
 import matplotlib.pyplot as plt
 import dFunc as func
