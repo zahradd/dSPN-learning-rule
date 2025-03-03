@@ -352,7 +352,7 @@ class justSteep:
             synNumber_inh=nDend*num_syn_inh
             corticalnoise=144
             batch=12
-            epoc=80
+            epoc=1
             num=batch*epoc
             noghte1=[]
             np.random.seed(corticalnoise)

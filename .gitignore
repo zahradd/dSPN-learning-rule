@@ -1,0 +1,16 @@
+__pycache_/
+Results/
+Result/
+traces/
+.idea
+*.pyc
+*.c
+*.o
+*.e
+*.dll
+*.tmp
+*.log
+*.png
+.ipynb_checkpoints/
+x86_64/
+

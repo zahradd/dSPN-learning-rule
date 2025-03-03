@@ -13,7 +13,11 @@ import Xor_spillOver as pa
 import pickle
 import matplotlib.pyplot as plt
 import dFunc as func
+from mpi4py import MPI
 
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+nprocs = comm.Get_size()
 t0 = time.time()
 
 
