@@ -71,7 +71,7 @@ with open(json_path, "r") as json_file:
 selected_experiment = experiments[experiment_index]
 
 # Extract dendritic list
-dendlst1 = selected_experiment["dendlst1"]
+dendlst1 = selected_experiment["dendlist"]
 
 # Ensure there are enough dendrite entries for all processes
 if rank == 0:
