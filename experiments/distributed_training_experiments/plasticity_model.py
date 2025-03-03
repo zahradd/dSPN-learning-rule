@@ -271,16 +271,16 @@ class justSteep:
                 Rec_Wg_GABA[isyni]= h.Vector()
                 Rec_Wg_GABA[isyni].record(syni._ref_weight,100)
                 checkD_i[isyni]= h.Vector()
-                checkD_i[isyni].record(syni._ref_tresh,100)
+                checkD_i[isyni].record(syni._ref_CTH,100)
                 checkD_imin[isyni]= h.Vector()
-                checkD_imin[isyni].record(syni._ref_tresh_min,100)
+                checkD_imin[isyni].record(syni._ref_CTL,100)
                 checkDnaro_i[isyni]= h.Vector()
                 checkDnaro_i[isyni].record(syni._ref_mltype,100)
             for isyn,syn1 in enumerate(list_syn_nmda):
                 Rec_Wg_NMDA[isyn]= h.Vector()
                 Rec_Wg_NMDA[isyn].record(syn1._ref_weight,100)
                 checkD[isyn]= h.Vector()
-                checkD[isyn].record(syn1._ref_tresh,100)
+                checkD[isyn].record(syn1._ref_kernel_MidPoint,100)
                 checkDnaro[isyn]= h.Vector()
                 checkDnaro[isyn].record(syn1._ref_conc0,100)
                 checkDLtype[isyn]= h.Vector()
@@ -322,63 +322,80 @@ class justSteep:
                 tstops.append(tstarts[-1]+800)  
                 tstops.sort()  
                 return tstarts,tstops
-       def beforMain(self):
-            # stORsh=['eta','alpha','mg','inh or not','example reward punish regular','general or non dopamine']
-            stORsh=[0.381679389,0.062,1,1,'else','non']
-         
-            batch=12
-            epoc=80
-            num=batch*epoc
-            noghte1=[]
-            # np.random.seed(1)
-            # w_exe_cor=abs(np.random.normal(0.2, 0.05, size=(1, corticalnoise)))
-            tasks=['YB','RS','YS','RB']
-            # tasks=['YB']
-            # expectedOutput={'YB':1}
-
-            expectedOutput={'YB':1,'RS':1,'YS':-1,'RB':-1}
-            train1,expect=func.makeTrainingBatches(epoc,tasks,batch,expectedOutput,self.rank)
-            # print('trian2',train1)
-            tstarts,tstops=justSteep.timeStep(100,num)
-            # print(tstarts,tstops)
-            # dendlst=self.v
-            synNumber1=200
-            timespan=20
-            NumberOfspike=1
-         
-               
-            inputDict={'B':0.2,'S':0.2,'Y':0.2,'R':0.2,'E':0.2}
-            assignInputTask={'YB':['Y','B','E'],'RS':['R','S','E'],'YS':['Y','S','E'],'RB':['R','B','E']}
-
-            # assignInputTask={'YB':['Y','B'],'RS':['R','S'],'YS':['Y','S'],'RB':['R','B']}
-            dendinput,synNumber1,inputListSyn=func.getSpiketrain(train1,tstarts,synNumber1,inputDict,assignInputTask,timespan,NumberOfspike,'random',self.rank)
-            # print('dendinput',dendinput,inputListSyn)
-            synNumber1_in=60
-            timespan_in=100
-            NumberOfspike_in=50
-
-            np.random.seed(123)
-
-            inputDict_in={'B':0.25,'S':0.25,'Y':0.25,'R':0.25}
-            assignInputTask_in={'YB':['Y','B'],'RS':['R','S'],'YS':['Y','S'],'RB':['R','B']}
-            dendinput_in,synNumber1_in,inputListSyn_in=func.getSpiketrain(train1,tstarts,synNumber1_in,inputDict_in,assignInputTask_in,timespan_in,NumberOfspike_in,'random',self.rank)
-
-            tresh=abs(np.random.normal(0.02, 0.001, size=(1, synNumber1)))
-           # var = self.rank * (0.8 - 0.001) / 100 + 0.001
-            #print('varrrr',var)
-            w_exe = abs(np.random.normal(0.45, 0.1, size=(1, synNumber1)))
-            w_in=abs(np.random.normal(0.1, 0.01, size=(1, synNumber1_in)))*1e-3
-
-            dend_exe=[4,8,12,15,21,22,24,26,28,35,36,37,41,46,47,51,52,53,57,3,14,17,18,29,40,45,48,56,27,44]
-
-
-
-
-           
-     
-            vm,tmfff,tm,Rec_Wg_NMDA,Rec_Wg_GABA,secName,checkD,checkDnaro, checkD_i,checkD_imin,checkDnaro_i,checkDLtype,Output ,Output_in,DendPosition1=justSteep.callbb(self,expect,tstops,w_exe,w_in,dend_exe,dendinput,tresh,noghte1,train1,stORsh,synNumber1,dendinput_in,synNumber1_in)
-            # ,checkDendVoltage,checkDendNmda ,checkDendCal,checkD,checkDnaro,checkD_cor,checkDnaro_cor
- 
+       def beforMain(self,config):
+            # Parameters related to learning configuration
+            stORsh = [0.381679389, 0.062, 1, config["include_inhibition"], 'else', 'non']
+        
           
-             ##############################################################
-            return   w_exe ,Rec_Wg_NMDA,w_in,Rec_Wg_GABA,noghte1,secName,tmfff,checkD,checkDnaro,train1, checkD_i,checkD_imin,checkDnaro_i,checkDLtype,inputListSyn,Output, inputListSyn_in,Output_in,DendPosition1
+        
+            # Extract general settings
+            batch = config["batch_size"]
+            epoc = config["num_epochs"]
+            num = batch * epoc
+        
+            tasks = config["tasks"]
+            expectedOutput = config["expected_output"]
+        
+            # Generate training batches
+            train1, expect = func.makeTrainingBatches(epoc, tasks, batch, expectedOutput, self.rank)
+        
+            # Generate time steps
+            tstarts, tstops = justSteep.timeStep(100, num)
+        
+            # Load excitatory input properties
+            synNumber1 = config["excitatory_input"]["syn_number"]
+            timespan = config["excitatory_input"]["timespan"]
+            NumberOfspike = config["excitatory_input"]["num_spikes"]
+        
+            inputDict = config["excitatory_input"]["input_distribution"]
+            assignInputTask = config["excitatory_input"]["task_input_assignment"]
+        
+            # Generate spike train for excitatory input
+            dendinput, synNumber1, inputListSyn = func.getSpiketrain(
+                train1, tstarts, synNumber1, inputDict, assignInputTask, timespan, NumberOfspike, "random", self.rank
+            )
+        
+            # Load inhibitory input properties
+            synNumber1_in = config["inhibitory_input"]["syn_number"]
+            timespan_in = config["inhibitory_input"]["timespan"]
+            NumberOfspike_in = config["inhibitory_input"]["num_spikes"]
+        
+            inputDict_in = config["inhibitory_input"]["input_distribution"]
+            assignInputTask_in = config["inhibitory_input"]["task_input_assignment"]
+        
+            # Generate spike train for inhibitory input
+            dendinput_in, synNumber1_in, inputListSyn_in = func.getSpiketrain(
+                train1, tstarts, synNumber1_in, inputDict_in, assignInputTask_in, timespan_in, NumberOfspike_in, "random", self.rank
+            )
+        
+            # Set up excitatory neuron properties
+            np.random.seed(123)
+            tresh = abs(np.random.normal(config["excitatory_input"]["threshold_mean"], 
+                                         config["excitatory_input"]["threshold_std"], 
+                                         size=(1, synNumber1)))
+        
+            w_exe = abs(np.random.normal(config["excitatory_input"]["weight_mean"], 
+                                         config["excitatory_input"]["weight_std"], 
+                                         size=(1, synNumber1)))
+        
+            # Set up inhibitory neuron properties
+            w_in = abs(np.random.normal(config["inhibitory_input"]["weight_mean"], 
+                                        config["inhibitory_input"]["weight_std"], 
+                                        size=(1, synNumber1_in))) * config["inhibitory_input"]["weight_scaling_factor"]
+        
+            # Load dendritic locations
+            dend_exe = config["dendritic_locations"]
+        
+            # Call `callbb` from justSteep module
+            vm, tmfff, tm, Rec_Wg_NMDA, Rec_Wg_GABA, secName, checkD, checkDnaro, checkD_i, checkD_imin, \
+                checkDnaro_i, checkDLtype, Output, Output_in, DendPosition1 = justSteep.callbb(
+                    self, expect, tstops, w_exe, w_in, dend_exe, dendinput, tresh, [],
+                    train1, stORsh, synNumber1, dendinput_in, synNumber1_in
+            )
+        
+            # Return all required variables
+            return (
+                w_exe, Rec_Wg_NMDA, w_in, Rec_Wg_GABA, [], secName, tmfff, checkD, checkDnaro, train1,
+                checkD_i, checkD_imin, checkDnaro_i, checkDLtype, inputListSyn, Output, inputListSyn_in,
+                Output_in, DendPosition1
+            )

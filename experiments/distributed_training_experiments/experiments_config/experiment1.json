@@ -1,0 +1,45 @@
+{
+  "batch_size": 4,
+  "num_epochs": 1,
+  "include_inhibition":1,
+
+  "num_training_iterations": 960,
+  "tasks": ["YB", "RS", "YS", "RB"],
+  "expected_output": {"YB": 1, "RS": 1, "YS": -1, "RB": -1},
+
+  "excitatory_input": {
+    "syn_number": 200,
+    "input_distribution": {"B": 0.2, "S": 0.2, "Y": 0.2, "R": 0.2, "E": 0.2},
+    "task_input_assignment": {
+      "YB": ["Y", "B", "E"],
+      "RS": ["R", "S", "E"],
+      "YS": ["Y", "S", "E"],
+      "RB": ["R", "B", "E"]
+    },
+    "timespan": 20,
+    "num_spikes": 1,
+    "threshold_std": 0.001,
+    "threshold_mean": 0.02,
+    "weight_mean": 0.45,
+    "weight_std": 0.1
+  },
+
+  "inhibitory_input": {
+    "syn_number": 60,
+    "input_distribution": {"B": 0.25, "S": 0.25, "Y": 0.25, "R": 0.25},
+    "task_input_assignment": {
+      "YB": ["Y", "B"],
+      "RS": ["R", "S"],
+      "YS": ["Y", "S"],
+      "RB": ["R", "B"]
+    },
+   
+    "timespan": 100,
+    "num_spikes": 50,
+     "weight_mean": 0.1,
+    "weight_std": 0.01,
+    "weight_scaling_factor": 1e-3
+  },
+
+  "dendritic_locations": [4, 8, 12, 15, 21, 22, 24, 26, 28, 35, 36, 37, 41, 46, 47, 51, 52, 53, 57, 3, 14, 17, 18, 29, 40, 45, 48, 56, 27, 44]
+}
