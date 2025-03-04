@@ -38,19 +38,19 @@ cd experiments/
 
 The main subdirectories include:
 
-- `clustered_training_experiments`
-  - This folder contains experiments focused on clustered synaptic inputs and their effects on plasticity.
-  - A single JSON file is used to define multiple experiments, which can be selected within `run_cluster_experiment.py`.
-  - It includes scripts for running cluster-based plasticity experiments and analyzing results.
+- **`clustered_training_experiments`**  
+  - Contains experiments focused on clustered synaptic inputs and their effects on plasticity.  
+  - A **single JSON file (`experiment_config.json`)** defines multiple experiments, which can be selected within `run_cluster_experiment.py`.  
+  - Includes scripts for running cluster-based plasticity experiments and analyzing results.  
 
-- `distributed_training_experiments`
-  - This folder contains experiments investigating distributed synaptic inputs and their impact on plasticity.
-  - Each experiment has its own JSON configuration file, which can be chosen when running `run_plasticity_experiment.py`.
-  - The simulations in this directory distribute synaptic activity across a wider range of dendritic locations.
+- **`distributed_training_experiments`**  
+  - Contains experiments investigating distributed synaptic inputs and their impact on plasticity.  
+  - **Each experiment has its own JSON configuration file**, stored in the `experiments_config/` directory, which can be chosen when running `run_plasticity_experiment.py`.  
+  - The simulations in this directory distribute synaptic activity across a wider range of dendritic locations.  
 
 ### 2. Running a Simulation
 
-To start a simulation, navigate to the appropriate folder. For example, for the clustered training experiments:
+To start a simulation, navigate to the appropriate folder. For example, for clustered training experiments:
 
 ```bash
 cd clustered_training_experiments/
@@ -66,18 +66,24 @@ nrnivmodl ../../mechanisms/
 
 #### **Running the Simulation**
 
-For clustered training experiments, execute:
+- **For clustered training experiments**, execute:
 
-```bash
-python run_cluster_experiment.py
-```
+  ```bash
+  python run_cluster_experiment.py
+  ```
 
-For distributed training experiments, navigate to that directory and run:
+  - The experiment configuration is specified in `experiment_config.json`.
+  - You can select different experiments from this file when running the script.
 
-```bash
-cd ../distributed_training_experiments/
-python run_plasticity_experiment.py
-```
+- **For distributed training experiments**, navigate to the directory and run:
+
+  ```bash
+  cd ../distributed_training_experiments/
+  python run_plasticity_experiment.py
+  ```
+
+  - The experiment configurations are stored as separate JSON files in `experiments_config/`.
+  - The specific experiment is selected when executing `run_plasticity_experiment.py`.
 
 ### 3. Plotting Results
 
