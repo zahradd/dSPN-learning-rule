@@ -38,12 +38,14 @@ cd experiments/
 
 The main subdirectories include:
 
-- **`clustered_training_experiments/`**  
+- `clustered_training_experiments`
   - This folder contains experiments focused on clustered synaptic inputs and their effects on plasticity.
+  - A single JSON file is used to define multiple experiments, which can be selected within `run_cluster_experiment.py`.
   - It includes scripts for running cluster-based plasticity experiments and analyzing results.
 
-- **`distributed_training_experiments/`**  
+- `distributed_training_experiments`
   - This folder contains experiments investigating distributed synaptic inputs and their impact on plasticity.
+  - Each experiment has its own JSON configuration file, which can be chosen when running `run_plasticity_experiment.py`.
   - The simulations in this directory distribute synaptic activity across a wider range of dendritic locations.
 
 ### 2. Running a Simulation
@@ -55,6 +57,7 @@ cd clustered_training_experiments/
 ```
 
 #### **Compiling Mechanisms**
+
 Before running simulations, ensure that the necessary NEURON mechanisms are compiled:
 
 ```bash
@@ -62,7 +65,8 @@ nrnivmodl ../../mechanisms/
 ```
 
 #### **Running the Simulation**
-Once compiled, run the simulation using:
+
+For clustered training experiments, execute:
 
 ```bash
 python run_cluster_experiment.py
@@ -86,7 +90,6 @@ jupyter-lab plot.ipynb
 ```
 
 This notebook contains scripts for visualizing synaptic plasticity changes, performance metrics, and other relevant analyses.
-
 
 
 
