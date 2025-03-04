@@ -45,7 +45,7 @@ The main subdirectories include:
 
 - **`distributed_training_experiments`**  
   - Contains experiments investigating distributed synaptic inputs and their impact on plasticity.  
-  - **Each experiment has its own JSON configuration file**, stored in the `config/` directory, which can be chosen when running `run_plasticity_experiment.py`.  
+  - **Each experiment has its own JSON configuration file**, stored in the `experiments_config/` directory, which can be chosen when running `run_plasticity_experiment.py`.  
   - These simulations introduce **more randomness** in synaptic placement and activation, allowing for greater flexibility in modifying the network’s behavior.  
 
 ### 2. Running a Simulation
