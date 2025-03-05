@@ -1,7 +1,7 @@
 import plasticity_model as pa
 import sys
 import os
-json_filename =  "experiment1.json" # Picks the experiment
+json_filename = "experiment1.json" # Picks the experiment
 
 
 import json
