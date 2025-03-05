@@ -67,11 +67,21 @@ To start a simulation, navigate to the appropriate folder:
 
   ```bash
   cd clustered_training_experiments/
-  python run_cluster_experiment.py 
+  python run_cluster_experiment.py -i 1
   ```
-
-  - The experiment configuration is specified in `experiment_config.json`.
-  - You can select different experiments from this file when running the script.
+  
+  which will run experiment 1 (as specified in `experiment_config.json`). 
+  
+  You can select different experiments by changing the argument from 1-8:
+  
+  - 1: Figure 3 example, without (default)
+  - 2: Figure 4 combination
+  - 3: Figure 5, with inhibition
+  - 4: ...
+  - 5: ...
+  - 6: ...
+  - 7: ...
+  - 8: ...
 
 - **For distributed training experiments**, execute:
 

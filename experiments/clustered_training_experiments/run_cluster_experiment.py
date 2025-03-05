@@ -1,5 +1,5 @@
-experiment_index = 1  # Change this to run different experiments
 
+import argparse
 import cluster_model as pa
 import sys
 import os
@@ -12,6 +12,15 @@ import dFunc as func
 from mpi4py import MPI
 from neuron import h
 import neuron as nrn
+
+# parse arguments
+parser = argparse.ArgumentParser(description='master script for running clustered simulations')
+parser.add_argument('-i','--expind', help='experiment index (1-8)', type=int, required=True, choices=range(1,9))
+args, ip = parser.parse_known_args()
+
+# set experiment index
+experiment_index = args.expind
+
 
 # load mechanisms (please compile first: go to directory and run: nrnivmodl)
 nrn.load_mechanisms('../../mechanisms')
@@ -61,8 +70,8 @@ json_path = os.path.normpath(json_path)
 with open(json_path, "r") as json_file:
     experiments = json.load(json_file)["experiments"]
 
-# Select experiment (modify index as needed)
-selected_experiment = experiments[experiment_index]
+# Select experiment from list of experiments
+selected_experiment = experiments[experiment_index-1]
 
 # Extract dendritic list
 dendlst1 = selected_experiment["dendlist"]

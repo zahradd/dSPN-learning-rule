@@ -7,7 +7,7 @@
       "num_unspecific_features":108,
       "task_type":"3example",
       "dendlist": [[14.0, 41.0]],
-      "comment": "Figure 3 emaple"
+      "comment": "Figure 3 example"
     },
     {
       "name": "experiment2",
@@ -25,7 +25,7 @@
       "num_unspecific_features":144,
       "task_type":"combination",
       "dendlist": [[14.0, 41.0]],
-      "comment": "Figure 3 emaple   "
+      "comment": "Figure 5, with inhibition"
     },
     {
       "name": "experiment4",
