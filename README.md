@@ -69,7 +69,7 @@ nrnivmodl ../../mechanisms/
 - **For clustered training experiments**, execute:
 
   ```bash
-  mpiexec -n 1 python run_cluster_experiment.py  
+       mpiexec -n 1 python run_cluster_experiment.py  
   ```
 
   - The experiment configuration is specified in `experiment_config.json`.
@@ -79,7 +79,7 @@ nrnivmodl ../../mechanisms/
 
   ```bash
   cd ../distributed_training_experiments/
- mpiexec -n 1  python run_plasticity_experiment.py
+      mpiexec -n 1  python run_plasticity_experiment.py
   ```
 
   - The experiment configurations are stored as separate JSON files in `experiments_config/`.
