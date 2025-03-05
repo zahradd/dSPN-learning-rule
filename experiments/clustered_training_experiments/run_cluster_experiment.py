@@ -38,15 +38,6 @@ nrnmech_dll = os.path.join(mechanisms_dir, "nrnmech.dll")
 # Linux/macOS: Look for libnrnmech.so
 nrnmech_so = os.path.join(mechanisms_dir, "x86_64", ".libs", "libnrnmech.so")
 
-if os.path.exists(nrnmech_dll):  # Windows
-    h.nrn_load_dll(nrnmech_dll)
-    print(f"Successfully loaded NEURON mechanisms from {nrnmech_dll}")
-elif os.path.exists(nrnmech_so):  # Linux/macOS
-    h.nrn_load_dll(nrnmech_so)
-    print(f"Successfully loaded NEURON mechanisms from {nrnmech_dll}")
-else:
-    raise FileNotFoundError(f"❌ Mechanism files not found in {mechanisms_dir}. Please compile .mod files using `mknrndll` (Windows) or `nrnivmodl` (Linux/macOS).")
-
 # Load best fit model
 bestfitmodel = 'D1_71bestFit_updRheob.pkl'
 bestfitmodel_path = os.path.join(updatedmodel_dir, bestfitmodel)
