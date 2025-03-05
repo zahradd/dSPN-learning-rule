@@ -28,6 +28,14 @@ The model demonstrates how a **single neuron can solve the Nonlinear Feature Bin
 
 ## Running Simulations
 
+#### **Compiling Mechanisms**
+
+```bash
+cd mechanisms/
+nrnivmodl
+cd ..
+```
+
 ### 1. Navigate to the `experiments/` directory
 
 This directory contains all the different simulation setups used in the paper:
@@ -48,13 +56,6 @@ The main subdirectories include:
   - **Each experiment has its own JSON configuration file**, stored in the `experiments_config/` directory, which can be chosen when running `run_plasticity_experiment.py`.  
   - These simulations introduce **more randomness** in synaptic placement and activation, allowing for greater flexibility in modifying the network’s behavior.  
 
-#### **Compiling Mechanisms**
-
-```bash
-cd mechanisms/
-nrnivmodl
-cd ..
-```
 
 ### 2. Running a Simulation
 
