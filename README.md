@@ -38,23 +38,26 @@ cd experiments/
 
 The main subdirectories include:
 
-- **`clustered_training_experiments/`**  
-  - This folder contains experiments focused on clustered synaptic inputs and their effects on plasticity.
-  - It includes scripts for running cluster-based plasticity experiments and analyzing results.
+- **`clustered_training_experiments`**  
+  - Contains experiments focused on clustered synaptic inputs and their effects on plasticity.  
+  - A **single JSON file (`experiment_config.json`)** defines multiple experiments, which can be selected within `run_cluster_experiment.py`.  
+  - Includes scripts for running cluster-based plasticity experiments and analyzing results.  
 
-- **`distributed_training_experiments/`**  
-  - This folder contains experiments investigating distributed synaptic inputs and their impact on plasticity.
-  - The simulations in this directory distribute synaptic activity across a wider range of dendritic locations.
+- **`distributed_training_experiments`**  
+  - Contains experiments investigating distributed synaptic inputs and their impact on plasticity.  
+  - **Each experiment has its own JSON configuration file**, stored in the `experiments_config/` directory, which can be chosen when running `run_plasticity_experiment.py`.  
+  - These simulations introduce **more randomness** in synaptic placement and activation, allowing for greater flexibility in modifying the network’s behavior.  
 
 ### 2. Running a Simulation
 
-To start a simulation, navigate to the appropriate folder. For example, for the clustered training experiments:
+To start a simulation, navigate to the appropriate folder. For example, for clustered training experiments:
 
 ```bash
 cd clustered_training_experiments/
 ```
 
 #### **Compiling Mechanisms**
+
 Before running simulations, ensure that the necessary NEURON mechanisms are compiled:
 
 ```bash
@@ -62,18 +65,25 @@ nrnivmodl ../../mechanisms/
 ```
 
 #### **Running the Simulation**
-Once compiled, run the simulation using:
 
-```bash
-python run_cluster_experiment.py
-```
+- **For clustered training experiments**, execute:
 
-For distributed training experiments, navigate to that directory and run:
+  ```bash
+       mpiexec -n 1 python run_cluster_experiment.py  
+  ```
 
-```bash
-cd ../distributed_training_experiments/
-python run_plasticity_experiment.py
-```
+  - The experiment configuration is specified in `experiment_config.json`.
+  - You can select different experiments from this file when running the script.
+
+- **For distributed training experiments**, navigate to the directory and run:
+
+  ```bash
+  cd ../distributed_training_experiments/
+      mpiexec -n 1  python run_plasticity_experiment.py
+  ```
+
+  - The experiment configurations are stored as separate JSON files in `experiments_config/`.
+  - The specific experiment is selected when executing `run_plasticity_experiment.py`.
 
 ### 3. Plotting Results
 
@@ -86,7 +96,6 @@ jupyter-lab plot.ipynb
 ```
 
 This notebook contains scripts for visualizing synaptic plasticity changes, performance metrics, and other relevant analyses.
-
 
 
 
