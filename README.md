@@ -28,23 +28,25 @@ The model demonstrates how a **single neuron can solve the Nonlinear Feature Bin
 
 ## Running Simulations
 
-#### **Compiling Mechanisms**
+First, start by **compiling mechanisms**
 
 ```bash
 cd mechanisms/
 nrnivmodl
 cd ..
-```
+```  
 
-### 1. Navigate to the `experiments/` directory
+then
 
-This directory contains all the different simulation setups used in the paper:
+### Navigate to the `experiments/` directory
 
 ```bash
 cd experiments/
 ```
 
-The main subdirectories include:
+This directory contains all the different simulation setups used in the paper.
+
+The two subdirectories include:
 
 - **`clustered_training_experiments`**  
   - Contains experiments focused on clustered synaptic inputs and their effects on plasticity.  
@@ -57,12 +59,9 @@ The main subdirectories include:
   - These simulations introduce **more randomness** in synaptic placement and activation, allowing for greater flexibility in modifying the network’s behavior.  
 
 
-### 2. Running a Simulation
+### Start a simulation
 
-To start a simulation, navigate to the appropriate folder. For example, for clustered training experiments:
-
-
-#### **Running the Simulation**
+To start a simulation, navigate to the appropriate folder:
 
 - **For clustered training experiments**, execute:
 
@@ -74,7 +73,7 @@ To start a simulation, navigate to the appropriate folder. For example, for clus
   - The experiment configuration is specified in `experiment_config.json`.
   - You can select different experiments from this file when running the script.
 
-- **For distributed training experiments**, navigate to the directory and run:
+- **For distributed training experiments**, execute:
 
   ```bash
   cd distributed_training_experiments/
@@ -84,9 +83,9 @@ To start a simulation, navigate to the appropriate folder. For example, for clus
   - The experiment configurations are stored as separate JSON files in `experiments_config/`.
   - The specific experiment is selected when executing `run_plasticity_experiment.py`.
 
-### 3. Plotting Results
+## Plotting Results
 
-After running the simulations, results can be visualized using the provided Jupyter notebooks.
+After a simulations is run, results can be visualized using the provided Jupyter notebooks.
 
 For interactive analysis, open the plotting notebook:
 
@@ -94,7 +93,7 @@ For interactive analysis, open the plotting notebook:
 jupyter-lab plot.ipynb
 ```
 
-This notebook contains scripts for visualizing synaptic plasticity changes, performance metrics, and other relevant analyses.
+This notebooks contains functions for visualizing synaptic plasticity changes, performance metrics, and other relevant analyses.
 
 
 
