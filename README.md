@@ -48,28 +48,26 @@ The main subdirectories include:
   - **Each experiment has its own JSON configuration file**, stored in the `experiments_config/` directory, which can be chosen when running `run_plasticity_experiment.py`.  
   - These simulations introduce **more randomness** in synaptic placement and activation, allowing for greater flexibility in modifying the network’s behavior.  
 
+#### **Compiling Mechanisms**
+
+```bash
+cd mechanisms/
+nrnivmodl
+cd ..
+```
+
 ### 2. Running a Simulation
 
 To start a simulation, navigate to the appropriate folder. For example, for clustered training experiments:
 
-```bash
-cd clustered_training_experiments/
-```
-
-#### **Compiling Mechanisms**
-
-Before running simulations, ensure that the necessary NEURON mechanisms are compiled:
-
-```bash
-nrnivmodl ../../mechanisms/
-```
 
 #### **Running the Simulation**
 
 - **For clustered training experiments**, execute:
 
   ```bash
-        python run_cluster_experiment.py  
+  cd clustered_training_experiments/
+  python run_cluster_experiment.py 
   ```
 
   - The experiment configuration is specified in `experiment_config.json`.
@@ -78,8 +76,8 @@ nrnivmodl ../../mechanisms/
 - **For distributed training experiments**, navigate to the directory and run:
 
   ```bash
-  cd ../distributed_training_experiments/
-      python run_plasticity_experiment.py
+  cd distributed_training_experiments/
+  python run_plasticity_experiment.py
   ```
 
   - The experiment configurations are stored as separate JSON files in `experiments_config/`.

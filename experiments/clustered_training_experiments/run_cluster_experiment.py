@@ -11,6 +11,11 @@ import MSN_builder as build
 import dFunc as func
 from mpi4py import MPI
 from neuron import h
+import neuron as nrn
+
+# load mechanisms (please compile first: go to directory and run: nrnivmodl)
+nrn.load_mechanisms('../../mechanisms')
+
 
 # MPI initialization
 comm = MPI.COMM_WORLD
@@ -32,11 +37,9 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 
 mechanisms_dir = os.path.join(script_dir, '..', '..', "mechanisms")
 
+# TODO: do we need this? else please remove
 # Windows: Look for nrnmech.dll
 nrnmech_dll = os.path.join(mechanisms_dir, "nrnmech.dll")
-
-# Linux/macOS: Look for libnrnmech.so
-nrnmech_so = os.path.join(mechanisms_dir, "x86_64", ".libs", "libnrnmech.so")
 
 # Load best fit model
 bestfitmodel = 'D1_71bestFit_updRheob.pkl'
