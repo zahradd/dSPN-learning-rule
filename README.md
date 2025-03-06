@@ -117,6 +117,7 @@ This notebooks contains functions for visualizing synaptic plasticity changes, p
 
 ## Data Availability
 
+- raw data for large simulations can be requested from the first author (see contact information below)
 - Model components adapted from:
   - **Lindroos & Hellgren Kotaleski (2021)**: ModelDB accession **266775**
   - **Trpevski et al. (2023)**: ModelDB accession **2017143**
