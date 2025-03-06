@@ -96,7 +96,7 @@ To start a simulation, navigate to the appropriate folder:
   
   which will run experiment 1 (as specified in `experiment_config/` folder). 
   
-  You can select different experiments by changing the argument from 1-8:
+  You can select different experiments by changing the argument from 1-2:
   
   - 1: ... with inhibition
   - 2: ... without inhibition?
@@ -117,7 +117,6 @@ This notebooks contains functions for visualizing synaptic plasticity changes, p
 
 ## Data Availability
 
-- The processed simulation data is available in the **data/** folder.
 - Model components adapted from:
   - **Lindroos & Hellgren Kotaleski (2021)**: ModelDB accession **266775**
   - **Trpevski et al. (2023)**: ModelDB accession **2017143**
