@@ -103,9 +103,7 @@ if os.path.exists("/scratch"):
 else:
     NETWORK_DIR = os.path.join(os.getcwd(), "distributed_training_results_1")  # Local directory
 
-# Create the experiment-specific folder
-experiment_dir = os.path.join(NETWORK_DIR, fileName)
-os.makedirs(experiment_dir, exist_ok=True)  # Ensure the directory exists
+
 
 if rank == 0:
     func.save_obj(wFirst, os.path.join(NETWORK_DIR, f"{fileName}_WFirst"))

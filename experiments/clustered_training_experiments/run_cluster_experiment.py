@@ -128,9 +128,7 @@ if os.path.exists("/scratch"):
 else:
     NETWORK_DIR = os.path.join(os.getcwd(), "clustered_training_results_0")  # Local directory
 
-# Create the experiment-specific folder
-experiment_dir = os.path.join(NETWORK_DIR, fileName)
-os.makedirs(experiment_dir, exist_ok=True)  # Ensure the directory exists
+
 
 
 if rank == 0:
