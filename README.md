@@ -67,8 +67,10 @@ To start a simulation, navigate to the appropriate folder:
 
   ```bash
   cd clustered_training_experiments/
-  python run_cluster_experiment.py -i 1
+  python run_cluster_experiment.py -e 1
   ```
+  
+  (or mpiexec -n 1  python run_cluster_experiment.py -e 1)
   
   which will run experiment 1 (as specified in `experiment_config.json`). 
   
@@ -87,11 +89,17 @@ To start a simulation, navigate to the appropriate folder:
 
   ```bash
   cd distributed_training_experiments/
-  python run_plasticity_experiment.py
+  python run_plasticity_experiment.py -e 1
   ```
-
-  - The experiment configurations are stored as separate JSON files in `experiments_config/`.
-  - The specific experiment is selected when executing `run_plasticity_experiment.py`.
+  
+  (or mpiexec -n 1  python run_plasticity_experiment.py -e 1)
+  
+  which will run experiment 1 (as specified in `experiment_config/` folder). 
+  
+  You can select different experiments by changing the argument from 1-8:
+  
+  - 1: ... with inhibition
+  - 2: ... without inhibition?
 
 ## Plotting Results
 

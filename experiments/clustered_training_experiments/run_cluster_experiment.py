@@ -15,11 +15,11 @@ import neuron as nrn
 
 # parse arguments
 parser = argparse.ArgumentParser(description='master script for running clustered simulations')
-parser.add_argument('-i','--expind', help='experiment index (1-8)', type=int, required=True, choices=range(1,9))
+parser.add_argument('-e','--experiment', help='experiment index (1-8)', type=int, required=True, choices=range(1,9))
 args, ip = parser.parse_known_args()
 
 # set experiment index
-experiment_index = args.expind
+experiment_index = args.experiment
 
 
 # load mechanisms (please compile first: go to directory and run: nrnivmodl)

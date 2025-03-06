@@ -2,19 +2,17 @@
   "batch_size": 4,
   "num_epochs": 1,
   "include_inhibition":0,
-
   "num_training_iterations": 960,
-  "tasks": ['X1Y1', 'X1Y2',  'X2Y1', 'X2Y2'],
-  "expected_output": {'X1Y1': -1, 'X1Y2': 1,
-                  'X2Y1': 1, 'X2Y2': 1},
-
-  "excitatory_input": {
+  "tasks": ["X1Y1", "X1Y2",  "X2Y1", "X2Y2"],
+  "expected_output": {"X1Y1": -1, "X1Y2": 1,
+                  "X2Y1": 1, "X2Y2": 1},
+   "excitatory_input": {
     "syn_number": 300,
-    "input_distribution": {'X1':0.25,'X2':0.25,'Y1':0.25,'Y2':0.25},
-    "task_input_assignment": {'X1Y1': ['X1','Y1'],
-     'X1Y2': ['X1','Y2'],     
-     'X2Y1': ['X2','Y1'],
-     'X2Y2': ['X2','Y2']
+    "input_distribution": {"X1":0.25,"X2":0.25,"Y1":0.25,"Y2":0.25},
+    "task_input_assignment": {"X1Y1": ["X1","Y1"],
+     "X1Y2": ["X1","Y2"],     
+     "X2Y1": ["X2","Y1"],
+     "X2Y2": ["X2","Y2"]
     },
     "timespan": 20,
     "num_spikes": 1,
@@ -23,22 +21,19 @@
     "weight_mean": 0.15,
     "weight_std": 0.15
   },
-
   "inhibitory_input": {
     "syn_number": 10,
-    "input_distribution": {'X1':0.25,'X2':0.25,'Y1':0.25,'Y2':0.25},
-    "task_input_assignment": {'X1Y1': ['X1','Y1'],
-     'X1Y2': ['X1','Y2'],     
-     'X2Y1': ['X2','Y1'],
-     'X2Y2': ['X2','Y2']
+    "input_distribution": {"X1":0.25,"X2":0.25,"Y1":0.25,"Y2":0.25},
+    "task_input_assignment": {"X1Y1": ["X1","Y1"],
+     "X1Y2": ["X1","Y2"],     
+     "X2Y1": ["X2","Y1"],
+     "X2Y2": ["X2","Y2"]
     },
-   
     "timespan": 100,
     "num_spikes": 50,
      "weight_mean": 0.1,
     "weight_std": 0.01,
     "weight_scaling_factor": 1e-3
   },
-
-  "dendritic_locations": [4, 8, 12, 15, 21, 22, 24, 26, 28, 35, 36, 37, 41, 46, 47, 51, 52, 53, 57, 3, 14, 17, 18, 29, 40, 45, 48, 56, 27, 44]
+ "dendritic_locations": [4, 8, 12, 15, 21, 22, 24, 26, 28, 35, 36, 37, 41, 46, 47, 51, 52, 53, 57, 3, 14, 17, 18, 29, 40, 45, 48, 56, 27, 44]
 }

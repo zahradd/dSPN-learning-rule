@@ -1,17 +1,22 @@
+
+import argparse
 import plasticity_model as pa
 import sys
 import os
-json_filename = "experiment1.json" # Picks the experiment
-
-
 import json
 import time
 import numpy as np
 import pickle
 import MSN_builder as build
 import dFunc as func
-import matplotlib.pyplot as plt
 from mpi4py import MPI
+
+# parse arguments
+parser = argparse.ArgumentParser(description='master script for running clustered simulations')
+parser.add_argument('-e','--experiment', help='experiment index (1-2)', type=int, required=True, choices=range(1,3))
+args, ip = parser.parse_known_args()
+
+json_filename = f"experiment{args.experiment}.json" # Picks the experiment
 
 comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
