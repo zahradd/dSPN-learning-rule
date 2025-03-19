@@ -101,7 +101,8 @@ fileName = f"{experiment_name}"  # Use JSON filename as the experiment name
 if os.path.exists("/scratch"):
     NETWORK_DIR = '/scratch/snx3000/bp000380/Plasticity.data'  # HPC path
 else:
-    NETWORK_DIR = os.path.join(os.getcwd(), "distributed_training_results_1")  # Local directory
+    base_dir = os.path.abspath(os.path.join(os.getcwd(), "..", ".."))  # Moves two levels up
+    NETWORK_DIR = os.path.join(base_dir, "data", "distributed_training_results_1")
 
 
 
